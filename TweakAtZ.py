@@ -42,7 +42,7 @@ y = 0
 state = 0
 with open(filename, "w") as f:
 	for line in lines:
-		if getValue(line, 'G', None) == 1:
+		if getValue(line, 'G', None) in (0, 1):
 			newZ = getValue(line, 'Z', z)
 			x = getValue(line, 'X', x)
 			y = getValue(line, 'Y', y)
