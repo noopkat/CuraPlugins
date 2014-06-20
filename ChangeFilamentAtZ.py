@@ -4,12 +4,11 @@
 #Depend: GCode
 #Type: postprocess
 #Param: targetZ(float:5.0) Z height to pause at (mm)
-#Param: parkX(float:190) Head park X (mm)
-#Param: parkY(float:190) Head park Y (mm)
 #Param: parkZ(float:150) Head park Z (mm)
 #Param: retractAmount(float:5) Retraction amount (mm)
 
 ## Written by Steven Morlock, smorloc@gmail.com
+## Edited by Suz Hinton, @noopkat
 ## This script is licensed under the Creative Commons - Attribution - Share Alike (CC BY-SA) terms
 
 import re
@@ -50,11 +49,12 @@ with open(filename, "w") as f:
 					f.write("M83\n")		# Set E codes relative while in Absolute Coordinates (G90) 
 					f.write("G1 E-%f F6000\n" % (retractAmount))
 					# Move the head to specified location
-					f.write("G1 X%f Y%f Z%f F9000\n" % (parkX, parkY, parkZ))
+					f.write("G1 X%f Y%f Z%f F9000\n" % (0, 0, parkZ))
 					# Disable extruder stepper
 					f.write("M84 E\n")					
 					# Wait until the user continues printing
-					f.write("M0\n")
+					f.write("@pause\n")
+					f.write("G1 X%f Y%f F9000\n" % (0, 0))
 					# Move the head back to printing location
 					f.write("G1 X%f Y%f F9000\n" % (x, y))
 					f.write("G1 E0 F6000\n")
