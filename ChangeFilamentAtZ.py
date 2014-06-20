@@ -1,4 +1,4 @@
-#Name: Change Filament At Z
+#Name: Change Filament At Z, Noopkat Edition
 #Info: Pause the print at a certain height, move to a specified parking location, disable extruder stepper
 #Help: ChangeFilamentAtZ
 #Depend: GCode
